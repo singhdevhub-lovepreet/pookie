@@ -1,0 +1,50 @@
+diff --git a/node_modules/@react-three/fiber/dist/index-e6b5343a.esm.js b/node_modules/@react-three/fiber/dist/index-e6b5343a.esm.js
+index 1234567..abcdef0 100644
+--- a/node_modules/@react-three/fiber/dist/index-e6b5343a.esm.js
++++ b/node_modules/@react-three/fiber/dist/index-e6b5343a.esm.js
+@@ -75,6 +75,13 @@ import { BufferGeometry, Float32BufferAttribute, Mesh, DoubleSide, SRGBColorSpac
+   LinearSRGBColorSpace
+ } from 'three';
+ 
++// Add back missing constants
++const LinearEncoding = 3000;
++const sRGBEncoding = 3001;
++const GammaEncoding = 2;
++const RGBEEncoding = 3002;
++const RGBAFormat = 1023;
++
+ // Rest of the code...
+ 
+ // Replace usage of encoding with colorSpace
+@@ -118,7 +125,7 @@ function applyProps(instance, newProps, oldProps = {}, accumulative = false) {
+     if (key === 'args') continue;
+     
+     // Handle colorSpace conversion for textures
+-    if (instance.isTexture && key === 'encoding') {
++    if (instance.isTexture && (key === 'encoding' || key === 'colorSpace')) {
+       if (value === LinearEncoding) {
+         instance.colorSpace = LinearSRGBColorSpace;
+       } else if (value === sRGBEncoding) {
+@@ -126,7 +133,7 @@ function applyProps(instance, newProps, oldProps = {}, accumulative = false) {
+       } else {
+         instance.colorSpace = value;
+       }
+-      continue;
++      continue; 
+     }
+     
+     // Handle all other props
+diff --git a/node_modules/@react-three/fiber/dist/index-b90e75f9.cjs.dev.js b/node_modules/@react-three/fiber/dist/index-b90e75f9.cjs.dev.js
+index 1234567..abcdef0 100644
+--- a/node_modules/@react-three/fiber/dist/index-b90e75f9.cjs.dev.js
++++ b/node_modules/@react-three/fiber/dist/index-b90e75f9.cjs.dev.js
+@@ -75,6 +75,13 @@ var three = require('three');
+ 
++// Add back missing constants
++const LinearEncoding = 3000;
++const sRGBEncoding = 3001;
++const GammaEncoding = 2;
++const RGBEEncoding = 3002;
++const RGBAFormat = 1023;
++
+ // Similar changes as in the ESM file...
